@@ -1,0 +1,97 @@
+---
+title: "Coursera- Data Science specialization- Next word Prediction Application"
+author: "Rahim Siddiqui"
+date: "December 29, 2018"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+##Summary:
+
+
+This is a capstone project for Data Sceince specialization which performs a next word prediction based on a word or a sentence that is typed or pasted to the input text window. After pressing the Predict Next Word button it predictes the next word based on ferquency via Ngram NPL(epecifically by: unigram, bigram and trigram)
+
+
+##Cleaning and processing the text:
+
+
+First we load the listed three files: Blogs, News and Twitter from english forlder.
+Second we count the words and rows of each file. Then We take sample from each file due to memory and processing issues, after, we remove all the unnessary stuff from the text basically cleaning the text from symbols, numbers, punctions, low capping all the letters and removing all the whitespaces from text. 
+
+
+```{r, echo=FALSE, warning=FALSE}
+
+
+
+
+f = setwd("C:\\Coursera\\Data_Science_Capstone\\final\\en_US\\final\\Nextword")
+
+
+#Processing/cleaning our text data
+
+
+
+a <- 'Every man is said to have his peculiar ambition. (Abraham Lincoln)'
+
+```
+Before cleaning :
+
+[1] "Every man is said to have his peculiar ambition. (Abraham Lincoln)"
+
+After cleaning :
+
+[1] "every man is said to have his peculiar ambition abraham lincoln"
+
+##Top two words for bigram, trimgram and quadgram:
+
+```{r, echo=F, width= 150, height= 100}
+
+ng2 <- readRDS(file = "ng2.rds")
+ng3 <- readRDS(file = "ng3.rds")
+ng4 <- readRDS(file = "ng4.rds")
+
+
+```
+
+Bigram:
+
+```{r, echo=F}
+head(ng2,2)
+```
+
+Trigram:
+
+```{r, echo=F}
+head(ng3,2)
+```
+
+Quadgram:
+
+```{r, echo=F, width= 150, height= 150}
+head(ng4,2)
+```
+
+
+##Predicting next word: 
+
+After typing or pasting a word or a sentence a function is called which cleans the input text and pass it through the grams and predicts the next word based on previous word/words.
+The algorithm counts the number words entered in the text input and then it calls the ngram based on quatity of words and then it starts camparing from last word of the input text and goes backward so it compares the second from last and on. At the end it predicts the next word which has a high frequency. 
+
+For instance:
+
+"these recommendations are easy to follow and except for - adding some herbs to your "
+
+It predicts: [1] "tweets"
+
+Github:
+https://github.com/SIDIQIR/Data-Science-Capstone-project
+
+Shiny app:
+https://rs111.shinyapps.io/Nextword/
+
+
